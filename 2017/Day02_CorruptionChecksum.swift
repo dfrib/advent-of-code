@@ -35,7 +35,7 @@ extension String {
     var checkSum1: Int {
         return puzzleNumbers.reduce(0) { $0 + $1.minMaxDiff }
     }
-    // Part 2 (constraint: exactly two even values in each row).
+    // Part 2 (constraint: exactly two evenly divisable values in each row).
     var checkSum2: Int {
         return puzzleNumbers
             .map { $0.sorted(by: <) }

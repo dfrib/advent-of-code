@@ -24,6 +24,5 @@ extension String {
     }
 }
 
-print("Part 1 = ", puzzleInput.captchaSum1) // 1223
-print("Part 2 = ", puzzleInput.captchaSum2) // 1284
-
+print("Part 1 =", puzzleInput.captchaSum1) // 1223
+print("Part 2 =", puzzleInput.captchaSum2) // 1284
