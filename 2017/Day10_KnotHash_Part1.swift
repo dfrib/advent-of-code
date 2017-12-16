@@ -12,8 +12,8 @@ extension Array {
         self = Array(self[nt..<count] + self[0..<nt])
     }
     mutating func reverse(upTo n: Int) {
-        let nt = n % count
-        self = Array(self[0...nt].reversed() + self[(nt+1)..<count])
+        if n >= count { self.reverse() }
+        else { self = Array(self[0..<n].reversed() + self[n..<count]) }
     }
 }
 
@@ -22,6 +22,7 @@ let puzzleNumbers = puzzleInput
     .flatMap{Int($0)}
     .enumerated()
 
+// Run single knot hash round.
 var totalShift = 0
 for (skipSize, n) in puzzleNumbers {
     totalShift += n + skipSize
@@ -31,5 +32,5 @@ for (skipSize, n) in puzzleNumbers {
 list.rotateLeft(by: list.count - totalShift % list.count)
 
 // Result.
-print("Part 1 =", list[0]*list[1])
+print("Part 1 =", list[0]*list[1]) // 52070
 
