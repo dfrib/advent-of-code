@@ -42,7 +42,6 @@ let lengthSequence = puzzleInput
 // Run knot hash rounds.
 var totalShift = 0
 var accumulatedGlobalSkipSize = 0
-var answer1 = 0
 for _ in 1...64 {
     for n in lengthSequence {
         totalShift += n + accumulatedGlobalSkipSize
