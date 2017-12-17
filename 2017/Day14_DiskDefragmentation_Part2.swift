@@ -65,27 +65,32 @@ func knotHashBitPattern(_ input: String) -> String {
 // ------------------------------------------------------------------ //
 
 // ------------------------------------------------------------------ //
-// From Day 12
-var groups: [Set<Int>] = []
-while !adjacencyList.isEmpty {
-    // First first run: explicitly use start with 0, thereafter
-    // choose arbitrarily (list is non-empty, so .first exists).
-    let fromId = adjacencyList[0] != nil ? 0 : adjacencyList.keys.first!
+// From Day 12 (wrapped)
 
-    var group = Set<Int>([fromId])
-    var queue = adjacencyList[fromId] ?? []
-    while !queue.isEmpty {
-        if let next = queue.popLast(), !group.contains(next) {
-            queue += adjacencyList[next] ?? []
-            group.update(with: next)
+func groups(in adjacencyList: inout [Int:[Int]]) -> [Set<Int>] {
+    var groups: [Set<Int>] = []
+    while !adjacencyList.isEmpty {
+        // First first run: explicitly use start with 0, thereafter
+        // choose arbitrarily (list is non-empty, so .first exists).
+        let fromId = adjacencyList[0] != nil ? 0 : adjacencyList.keys.first!
+
+        var group = Set<Int>([fromId])
+        var queue = adjacencyList[fromId] ?? []
+        while !queue.isEmpty {
+            if let next = queue.popLast(), !group.contains(next) {
+                queue += adjacencyList[next] ?? []
+                group.update(with: next)
+            }
+        }
+
+        // Add group to groups list and remove its members from adj. list
+        groups.append(group)
+        for id in group {
+            adjacencyList.removeValue(forKey: id)
         }
     }
 
-    // Add group to groups list and remove its members from adj. list
-    groups.append(group)
-    for id in group {
-        adjacencyList.removeValue(forKey: id)
-    }
+    return groups
 }
 // ------------------------------------------------------------------ //
 
@@ -119,4 +124,4 @@ for (i, row) in grid.enumerated() {
 }
 
 // Result.
-print("Part 2 =", groups.count)  // 1093
+print("Part 2 =", groups(in: &adjacencyList).count)  // 1093
