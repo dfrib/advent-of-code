@@ -1,4 +1,4 @@
-// Advent of Code 2017 - Day 16: Permutation Promenade
+// Advent of Code 2017 - Day 17: Spinlock
 // Swift 4
 // ------------------------------------------------------------------ //
 let puzzleInput = 324
